@@ -1,0 +1,90 @@
+<div class="container mt-3">
+    <div class="card text-bg-success mb-3 ">
+        <div class="d-flex justify-content-between p-3">
+            <img src="../../assets/book.png" alt="img" width="80" height="70"><span>
+                <h1 class="font-monospace">ANGULAR QUIZ</h1>
+
+
+            </span>
+            <span>
+                <h5>Welcome user</h5>
+            </span>
+        </div>
+
+
+    </div>
+
+    <ng-container *ngIf="!isQuizCompleted">
+        <div class="card ">
+            <div class="d-flex justify-content-around py-3 text-dark">
+                <div class="score">
+                    <h5>{{points}} points</h5>
+                </div>
+                <div class="question"><span>{{currentQuestion+1}} out of 10</span></div>
+                <div class="timer">{{counter}} sec </div>
+            </div>
+            <div class="quetion">
+                <div class="card py-3">
+                    <h3>{{questionList[currentQuestion]?.questionText}}</h3>
+                </div>
+    
+            </div>
+            <div class="option">
+                <ul *ngFor="let option of questionList[currentQuestion]?.options">
+                    <li (click)="answer(currentQuestion+1 , option)">
+                        <div appChangeBg [isCorrect] = "option.correct"  class="card py-2">
+     
+                            {{option.text}}
+    
+                        </div>
+                    </li>
+    
+                </ul>
+            </div>
+    
+            <div class="d-flex justify-content-between">
+                <button [disabled]="currentQuestion===0" class="btn btn-primary" (click)="previousQuestion()"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                    </svg></button>
+                <button class="btn btn-primary" (click)="resetQuiz()"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                        <path
+                            d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                        <path fill-rule="evenodd"
+                            d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+                    </svg></button>
+                <button class="btn btn-primary" (click)="nextQuestion()"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                    </svg></button>
+            </div>
+        </div>
+    
+
+    </ng-container>
+
+    <ng-container *ngIf="isQuizCompleted">
+        <div class="row d-flex justify-content-between">
+            <img style="width:30%;" class="img fluid col-sm-12 mx-auto" src="../../assets/con.jpg">
+            <div class="result text-center col-md-6 col-sm-12">
+                <h3>YOU COMPLETED THE QUIZ</h3><br><h3>your result is here</h3>
+                <p>Total question attempted: {{ questionList.length}}</p>
+                <p>Total correct answers {{ correctAnswer}}</p>
+                <p>Total wrong answers {{incorrectAnswer}}</p>
+                <p>result:{{points}} points</p>
+                <button class="btn btn-primary " routerLink="/intro">back to home </button>
+                
+
+            </div>
+        </div>
+    </ng-container>
+    
+    
+
+
+
+</div>
